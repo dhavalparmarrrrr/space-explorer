@@ -1,0 +1,31 @@
+function startWebcam() {
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+      const video = document.getElementById("webcam");
+      video.srcObject = stream;
+    })
+    .catch(err => {
+      console.error("Webcam error:", err);
+      alert("Please enable camera permissions to continue!");
+    });
+}
+<!-- Good -->
+<button onclick="startWebcam()">Enable Camera</button>
+
+<!-- Bad (missing parentheses) -->
+<button onclick="startWebcam">Enable Camera</button>
+
+<!-- For images in the same folder -->
+<img src="astronaut.gif" alt="Astronaut">
+
+<!-- For images in a subfolder -->
+<img src="images/space-background.jpg" alt="Space">
+
+<!-- For external images -->
+<img src="https://example.com/space-image.png" alt="Space">
+
+your-repo/
+├── index.html
+├── images/
+│ ├── astronaut.gif
+│ └── space-background.jpg
