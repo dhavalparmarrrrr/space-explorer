@@ -1,67 +1,78 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Space Explorer!</title>
-  </head>
-  <body>
-    <h1>Welcome to Space Explorer! 🚀</h1>
-    <p>Learn about rockets, Mars, and more!</p>
-  </body>
-</html>
+<head>
+    <title>Space Explorer</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: black;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        button {
+            background: blue;
+            color: white;
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        #webcam {
+            border: 2px solid white;
+            margin: 10px;
+        }
+    </style>
+</head>
 <body>
-    <h1>Welcome to Space Explorer! 🚀</h1>
-    <!-- Add this image -->
+    <h1>🚀 Space Explorer!</h1>
     <img src="https://media.giphy.com/media/3o7TKsQ8Xaj7aKJacU/giphy.gif" width="200">
-    <p>Hi! I’m Captain Cosmo. Let’s explore space!</p>
-  </body>
-  <button onclick="startWebcam()">Turn on Webcam</button>
-<video id="webcam" width="300"></video>
+    <p>Hi! I'm Captain Cosmo.</p>
 
-<script>
-  function startWebcam() {
-    // Ask permission to use the webcam
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(stream => {
-        const video = document.getElementById("webcam");
-        video.srcObject = stream; // Show the webcam video
-      });
-  }
-</script>
-<button onclick="teachFact()">Click for a Space Fact!</button>
-<p id="fact"></p>
+    <button onclick="startWebcam()">Turn On Webcam</button><br>
+    <video id="webcam" width="300"></video>
 
-<script>
-  function teachFact() {
-    const facts = [
-      "The Moon is shrinking! 🌑",
-      "Mars has pink sunsets! 🌅",
-      "Saturn's rings are made of ice! 🪐"
-    ];
-    const randomFact = facts[Math.floor(Math.random() * facts.length)];
-    document.getElementById("fact").innerHTML = randomFact;
-  }
-</script>
-<h3>Quick Quiz!</h3>
-<p>Is Jupiter the largest planet?</p>
-<button onclick="checkAnswer(true)">True</button>
-<button onclick="checkAnswer(false)">False</button>
-<p id="result"></p>
+    <button onclick="showFact()">Space Fact</button>
+    <p id="fact"></p>
 
-<script>
-  function checkAnswer(answer) {
-    const correctAnswer = true; // Jupiter IS the largest
-    if (answer === correctAnswer) {
-      document.getElementById("result").innerHTML = "Correct! 🎉";
-    } else {
-      document.getElementById("result").innerHTML = "Oops! Try again! 💡";
-    }
-  }
-</script>
-let learnedFacts = 0;
+    <h3>Quiz: Is Jupiter the largest planet?</h3>
+    <button onclick="checkAnswer(true)">True</button>
+    <button onclick="checkAnswer(false)">False</button>
+    <p id="result"></p>
 
-function teachFact() {
-  // ... (previous code)
-  learnedFacts++;
-  localStorage.setItem("learnedFacts", learnedFacts); // Save to browser
-  alert(`You’ve learned ${learnedFacts} facts! Keep going! 🏆`);
-}
+    <script>
+        // Webcam
+        function startWebcam() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    document.getElementById("webcam").srcObject = stream;
+                })
+                .catch(err => {
+                    alert("Please allow camera access!");
+                });
+        }
+
+        // Facts
+        const facts = [
+            "The Moon is shrinking!",
+            "Mars has pink sunsets!",
+            "Saturn's rings are made of ice!"
+        ];
+        
+        function showFact() {
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            document.getElementById("fact").textContent = randomFact;
+        }
+
+        // Quiz
+        function checkAnswer(answer) {
+            const correct = true; // Jupiter is largest
+            if (answer === correct) {
+                document.getElementById("result").textContent = "Correct! 🎉";
+            } else {
+                document.getElementById("result").textContent = "Try again!";
+            }
+        }
+    </script>
+</body>
+</html>
