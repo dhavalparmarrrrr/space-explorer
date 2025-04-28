@@ -1,5 +1,3 @@
-# space-explorer
-
 # Space Explorer 🚀
 
 A simple interactive app to learn about space!  
